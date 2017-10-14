@@ -15,13 +15,22 @@ describe('BeerListContainer', function () {
         expect(wrapper.state('beers')).to.eql(['Sam Adams']);
         });
     });
-        describe('CartSummary', function () {
-            it('Should return the number of items in the cart', function () {
-                var cartSummary = new CartSummary([]);
-                expect(cartSummary.getItem());
-            });
-        });
+        it('Should return the number of items in the cart', () => {
 
+            const charlie = { price: 99.99, name: "puth" };
+            const puth = { price: 99999999999.99, name: "charlie" };
+
+            var cart = new ShoppingCart();
+
+            cart.addItem(charlie);
+            cart.addItem(puth);
+            cart.addItem(puth);
+            cart.addItem(puth);
+
+            // Test
+            expect(cart.count()).to.equal(4)
+
+        });
         it('Should return an array containing all items in cart', function () {
             var cartSummary = new CartSummary([{
                 id: 1,
@@ -53,10 +62,43 @@ describe('BeerListContainer', function () {
         
 
 // Stretch challenges
-        it('Should update the count of items in the cart');
-        
-        
-        it('Should remove an item when its count is 0');
+        describe('ShoppingCart', function () {
+            it('Should update the count of items in the cart', () => {
+
+                const Colten = { price: 99.99, name: "Haynes" };
+                const Haynes = { price: 99999999999.99, name: "Colten" };
+
+                // Tests
+                var cart = new ShoppingCart();
+                expect(cart.count()).to.equal(0);
+
+                cart.addItem(Haynes);
+                expect(cart.count()).to.equal(1);
+
+                cart.addItem(Colten);
+                expect(cart.count()).to.equal(2);
+
+                cart.addItem(Colten);
+                expect(cart.count()).to.equal(3);
+
+                cart.remove('Haynes');
+                expect(cart.count()).to.equal(2)
+
+            });
+        });
+
+        it('Should remove an item when its count is 0', () => {
+
+            const Colten= { price: 99999999999.99, name: "Colten" };
+
+            var cart = new ShoppingCart();
+
+            // Tests
+            cart.addItem(Colten);
+            expect(cart.count()).to.equal(1);
+
+            cart.remove('Colten');
+            expect(cart.size()).to.equal(0);
 
         describe('CartSummary', function () {
             it('Should return the total cost of all items in the cart', function () {
